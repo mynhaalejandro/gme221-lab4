@@ -5,6 +5,7 @@ import geopandas as gpd
 from sqlalchemy import create_engine
 from spatial_weights import contiguity_weights, knn_weights, distance_weights
 from visualization import visualize_neighbors
+from moran import calculate_global_morans_I
 
 host = "localhost"
 port = "5432"
@@ -26,27 +27,26 @@ gdf = gpd.read_postgis(sql_query, engine, geom_col="geom")
 print(gdf.head())
 print("CRS:", gdf.crs)
 
-# Test different weight methods and save visualizations
-print("\nGenerating spatial weights visualizations...")
+# Create spatial weights
+w = distance_weights(gdf)
+print("Neighbors:", w.neighbors)
 
-# Distance weights
-w_dist = distance_weights(gdf)
-visualize_neighbors(gdf, w_dist, "weights_distance_20.png")
+# Visualize spatial weights
+visualize_neighbors(gdf, w, "spatial_weights_graph.png")
 
-# Contiguity weights  
-w_contig = contiguity_weights(gdf)
-visualize_neighbors(gdf, w_contig, "weights_contiguity.png")
+# Global Moran's I for both attributes
+print("\n=== Global Moran's I Analysis ===")
 
-# KNN weights (k=4)
-w_knn4 = knn_weights(gdf, k=4)
-visualize_neighbors(gdf, w_knn4, "weights_knn_4.png")
+# Test ass_ass_va attribute
+attribute = "ass_ass_va"
+moran_I, p_value = calculate_global_morans_I(gdf, w, attribute)
+print(f"Attribute: {attribute}")
+print("Global Moran's I:", moran_I)
+print("p-value:", p_value)
 
-# KNN weights (k=8) - denser network
-w_knn8 = knn_weights(gdf, k=8)
-visualize_neighbors(gdf, w_knn8, "weights_knn_8.png")
-
-# Distance weights with larger threshold
-w_dist50 = distance_weights(gdf, threshold=50)
-visualize_neighbors(gdf, w_dist50, "weights_distance_50.png")
-
-print("All visualizations saved to output/ folder")
+# Test ass_market attribute
+attribute = "ass_market"
+moran_I, p_value = calculate_global_morans_I(gdf, w, attribute)
+print(f"\nAttribute: {attribute}")
+print("Global Moran's I:", moran_I)
+print("p-value:", p_value)

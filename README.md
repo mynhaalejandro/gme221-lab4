@@ -89,3 +89,20 @@ Each method produced different neighbor structures, confirming the impact of wei
 **6. Why is it important to visualize spatial weights before computing Moran's I?** Visualization reveals whether neighborhood definitions make geographic sense before running statistics. Incorrect neighborhood structures could connect unrelated parcels or miss important adjacencies, leading to misleading spatial autocorrelation results that don't reflect actual spatial patterns in property values.
 
 Spatial autocorrelation results are only as meaningful as the neighborhood definition used to compute them. If we define "neighbors" incorrectly, our statistical conclusions about property value clustering will be wrong. The visualization step ensures our neighborhood definitions make real-world sense before we analyze the data.
+
+### Milestone 5: Global Spatial Autocorrelation Analysis
+
+**1. What does positive Moran's I indicate?** Positive Moran's I indicates spatial clustering - similar property values tend to be located near each other. High-value properties cluster together, and low-value properties also cluster together, rather than being randomly distributed across space.
+
+**2. Why is the p-value required for interpretation?** The p-value determines statistical significance. Even if Moran's I shows clustering (positive value), we need p < 0.05 to confirm the pattern isn't due to random chance. Both our results (p=0.023 and p=0.014) are statistically significant.
+
+**3. What would Moran's I near zero suggest?** Moran's I near zero suggests random spatial distribution - property values show no clear spatial pattern. High and low values would be scattered randomly across the map without clustering.
+
+**4. What is the role of the attribute in computing Moran's I?** The attribute (ass_ass_va or ass_market) provides the values being analyzed for spatial patterns. Moran's I measures whether similar attribute values cluster spatially. Different attributes can show different spatial patterns even for the same parcels.
+
+**5. How might results change with different attributes?** Our results show assessed values (I=0.068) have slightly stronger clustering than market values (I=0.060). This suggests assessed values may be more spatially influenced by neighborhood factors, while market values show more variation independent of location.
+
+**6. Why does Moran's I require both spatial weights and attribute variables?** The spatial weights matrix defines "who are neighbors" while the attribute variable defines "what values are being compared." Without spatial weights, we can't determine spatial relationships. Without attributes, we have nothing to measure for clustering patterns.
+
+The results confirm that property values in this area show spatial clustering - similar values tend to be located near each other rather than randomly scattered. Both assessed and market values cluster spatially, but assessed values show slightly stronger clustering. This suggests that neighborhood characteristics (zoning, infrastructure, local amenities) influence property valuations, creating geographic patterns of high-value and low-value areas.
+

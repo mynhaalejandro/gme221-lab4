@@ -43,15 +43,14 @@ gme221-lab4/
 └── README.md
 ```
 
-## Commit Milestones
-| Milestone | Description |
-|-----------|-------------|
-| `init: project structure` | Folders, .gitignore, README scaffolded |
-| `feat: spatial weights` | Queen contiguity weights built |
-| `feat: global moran` | Global Moran's I computed and printed |
-| `feat: local moran` | LISA clusters classified |
-| `feat: visualization` | All plots exported to output/ |
-| `feat: geojson export` | Results exported as GeoJSON |
+## Commit Milestones and Reflections
 
-## Reflections
-*(To be expanded after each milestone.)*
+### Milestone 1: Project Setup
+Project structure created with required directories, dependencies configured, and baseline README established.
+
+### Milestone 2: Spatial Data as Statistical Observations
+**Why PostGIS over shapefile?** Database storage enables efficient attribute queries and spatial analysis workflows, essential for statistical operations on parcel valuation data.
+
+**What are spatial units vs. observations?** Parcel geometries define spatial units (where), while assessed values represent statistical observations (what) at those locations.
+
+**Why define spatial neighborhoods?** To measure spatial autocorrelation - whether similar property values cluster geographically rather than being randomly distributed across space.

@@ -54,3 +54,18 @@ Project structure created with required directories, dependencies configured, an
 **What are spatial units vs. observations?** Parcel geometries define spatial units (where), while assessed values represent statistical observations (what) at those locations.
 
 **Why define spatial neighborhoods?** To measure spatial autocorrelation - whether similar property values cluster geographically rather than being randomly distributed across space.
+
+### Milestone 3: Spatial Weights Construction
+**What does the spatial weights matrix represent?** It defines which parcels influence each other spatially, encoding neighborhood relationships as a mathematical structure for spatial statistics.
+
+**How do the three weight methods differ?** Contiguity uses shared boundaries, KNN uses nearest neighbors regardless of distance, while distance band includes all parcels within a threshold distance.
+
+**Why are some parcels "islands"?** Islands are parcels with no neighbors under the chosen weight method, often due to geographic isolation or overly restrictive distance thresholds.
+
+#### Experimentation Process:
+Tested different weight methods by modifying `w = distance_weights(gdf)` in analysis.py:
+1. **Distance method:** `w = distance_weights(gdf)` → Dense neighbor connections within 20 units
+2. **KNN method:** `w = knn_weights(gdf)` → Each parcel connects to exactly 4 nearest neighbors
+3. **Contiguity method:** `w = contiguity_weights(gdf)` → Only parcels sharing boundaries are neighbors
+
+Each method produced different neighbor structures, confirming the impact of weight selection on spatial relationship definition. Different weight methods define "neighborhood" differently, affecting which parcels influence each other in spatial analysis. Testing multiple approaches helps identify the most appropriate method for the research question.

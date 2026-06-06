@@ -69,3 +69,23 @@ Tested different weight methods by modifying `w = distance_weights(gdf)` in anal
 3. **Contiguity method:** `w = contiguity_weights(gdf)` → Only parcels sharing boundaries are neighbors
 
 Each method produced different neighbor structures, confirming the impact of weight selection on spatial relationship definition. Different weight methods define "neighborhood" differently, affecting which parcels influence each other in spatial analysis. Testing multiple approaches helps identify the most appropriate method for the research question.
+### Milestone 4: Spatial Weights Visualization and Analysis
+
+**1. How does the spatial weights graph represent neighborhood relationships?** Each parcel centroid becomes a node (dot) on the map, and connecting lines become edges that link neighboring parcels. This creates a spatial network where nodes represent geographic locations and edges represent which parcels influence each other spatially.
+
+**2. How does the structure of the neighbor graph change between methods?**
+- **Contiguity weights:** Creates sparse connections only between parcels that share boundaries - realistic but many isolated parcels
+- **K-nearest neighbors (KNN):** Ensures every parcel connects to exactly K closest neighbors - eliminates isolation but may create unrealistic long-distance connections
+- **Distance-based weights:** Connects all parcels within threshold distance - balances connectivity with geographic realism
+
+**3. What changes do you observe when modifying parameters?**
+- **Increasing K in KNN (4→8):** Each parcel gains additional neighbor connections, creating a much denser web of relationships across the map
+- **Increasing distance threshold (20→50):** More parcels fall within connection range, reducing isolated parcels and increasing overall network density
+
+**4. Does increasing K or distance create a denser spatial network?** Yes, both parameters create denser networks with more connections between parcels. This affects spatial autocorrelation strength because more parcels can influence each other, potentially amplifying clustering patterns in the statistical analysis.
+
+**5. Which spatial weights method best represents parcel relationships?** Contiguity weights best represent real property relationships because adjacent parcels genuinely influence each other through shared infrastructure, similar zoning, and neighborhood effects. Distance and KNN methods may create artificial connections between properties that don't logically influence each other.
+
+**6. Why is it important to visualize spatial weights before computing Moran's I?** Visualization reveals whether neighborhood definitions make geographic sense before running statistics. Incorrect neighborhood structures could connect unrelated parcels or miss important adjacencies, leading to misleading spatial autocorrelation results that don't reflect actual spatial patterns in property values.
+
+Spatial autocorrelation results are only as meaningful as the neighborhood definition used to compute them. If we define "neighbors" incorrectly, our statistical conclusions about property value clustering will be wrong. The visualization step ensures our neighborhood definitions make real-world sense before we analyze the data.

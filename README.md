@@ -21,10 +21,11 @@ python analysis.py
 ## Expected Outputs (`output/`)
 | File | Description |
 |------|-------------|
-| `choropleth.png` | Choropleth map of assessed values |
-| `moran_scatter.png` | Global Moran's I scatter plot |
-| `lisa_clusters.png` | LISA cluster map (HH / LL / HL / LH / NS) |
-| `assessed_parcels_moran.geojson` | Full results with cluster labels |
+| `local_moran_assessed_value.png` | LISA cluster map for assessed values |
+| `local_moran_market_value.png` | LISA cluster map for market values |
+| `spatial_weights_graph.png` | Spatial weights visualization |
+| `clusters_assessed_value.geojson` | Assessed value results with cluster labels |
+| `clusters_market_value.geojson` | Market value results with cluster labels |
 
 ## Project Structure
 ```

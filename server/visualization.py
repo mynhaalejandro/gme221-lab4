@@ -50,3 +50,38 @@ def visualize_neighbors(gdf, weights_obj, output_name="spatial_weights_graph.png
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
     print(f"Saved: {output_path}")
+
+def visualize_local_moran(gdf, output_name="local_moran_clusters.png"):
+    
+    # Create output directory if it doesn't exist
+    output_dir = pathlib.Path(__file__).parent.parent / "output"
+    output_dir.mkdir(exist_ok=True)
+
+    fig, ax = plt.subplots(figsize=(10,8))
+
+    colors = {
+        "Hotspot": "red",
+        "Coldspot": "blue",
+        "Not Significant": "lightgrey"
+    }
+
+    for cluster, color in colors.items():
+
+        subset = gdf[gdf["cluster"] == cluster]
+
+        if not subset.empty:
+            subset.plot(
+                ax=ax,
+                color=color,
+                edgecolor="black",
+                label=cluster
+            )
+
+    plt.title("Local Moran's I Cluster Map")
+    plt.legend()
+    
+    # Save to output folder
+    output_path = output_dir / output_name
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Saved: {output_path}")

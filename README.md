@@ -106,3 +106,30 @@ Spatial autocorrelation results are only as meaningful as the neighborhood defin
 
 The results confirm that property values in this area show spatial clustering - similar values tend to be located near each other rather than randomly scattered. Both assessed and market values cluster spatially, but assessed values show slightly stronger clustering. This suggests that neighborhood characteristics (zoning, infrastructure, local amenities) influence property valuations, creating geographic patterns of high-value and low-value areas.
 
+### Milestone 6: Local Spatial Autocorrelation Analysis
+
+**1. What is the difference between Global Moran's I and Local Moran's I?** Global Moran's I provides a single statistic summarizing spatial autocorrelation across the entire study area. Local Moran's I calculates a statistic for each individual parcel, identifying where specific clusters or outliers occur spatially.
+
+**2. How are hotspots and coldspots identified using Local Moran's I?** Hotspots are parcels with positive Local Moran's I values and p < 0.05, indicating high values surrounded by high values. Coldspots have negative Local Moran's I values and p < 0.05, indicating low values surrounded by low values. Non-significant areas (p ≥ 0.05) show no clear clustering pattern. Our analysis identified 210 hotspots, 7 coldspots, and 484 not significant parcels out of 701 total parcels.
+
+**3. Where do hotspots appear in your dataset?** Our analysis identified 210 hotspot parcels out of 701 total parcels. These represent areas where high-value properties cluster together, likely indicating premium neighborhoods or areas with desirable characteristics like good infrastructure, amenities, or zoning.
+
+**4. Where do coldspots appear in your dataset?** Only 7 coldspot parcels were identified, indicating rare areas where low-value properties cluster together. This suggests the study area doesn't have extensive low-value neighborhoods, possibly indicating overall decent property values throughout the region.
+
+**5. Did you observe any spatial outliers?** The analysis classified parcels into three categories: 210 hotspots (high values surrounded by high values), 7 coldspots (low values surrounded by low values), and 484 not significant areas. This simplified classification focused on clustering patterns rather than explicitly identifying spatial outliers like High-Low (expensive property in cheap area) or Low-High (cheap property in expensive area) patterns. The low number of coldspots (only 7) suggests spatial outliers are rare in this dataset, with most clustering being positive (high-value areas).
+
+**6. How does changing spatial weights affect Local Moran's I results?** Different weight methods alter neighbor definitions, changing which parcels qualify as hotspots or coldspots. Distance-based weights capture broader neighborhood effects compared to contiguity weights, which produce more localized clusters. KNN weights ensure no isolated parcels but create artificial long-distance connections affecting cluster patterns.
+
+#### Experimentation Process:
+Tested Local Moran's I with three different weight methods:
+1. **Distance weights (threshold=20):** 219 hotspots, 9 coldspots, 473 not significant
+2. **KNN weights (k=4):** 213 hotspots, 3 coldspots, 485 not significant  
+3. **Contiguity weights:** 177 hotspots, 50 coldspots, 474 not significant
+
+Different weight methods produced significantly different cluster patterns. Distance weights detected the most hotspots, while contiguity weights found dramatically more coldspots (50 vs 3-9). This confirms that neighborhood definition critically affects spatial autocorrelation results.
+
+**7. How does changing attributes affect spatial clusters?** The comparison shows that assessed values and market values produce remarkably similar spatial clustering patterns:
+- **Assessed values:** 210 hotspots, 7 coldspots, 484 not significant
+- **Market values:** 206 hotspots, 9 coldspots, 486 not significant
+
+The minimal differences (4 hotspot variance, 2 coldspot variance) indicate both valuation methods capture similar underlying geographic factors. This suggests assessment procedures closely align with market realities, and neighborhood characteristics equally influence both official assessments and market transactions. For spatial autocorrelation analysis, either attribute leads to similar conclusions about property value clustering patterns.
